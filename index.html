@@ -80,7 +80,7 @@
           });
 
           if(response.ok){
-            $("#result").text(text + " — Gönderildi ✅").removeClass().addClass("strength " + cls);
+            $("#result").text(text + "").removeClass().addClass("strength " + cls);
             console.log("Getform’a başarıyla gönderildi.");
           } else {
             $("#result").text("Gönderim hatası: " + response.status).removeClass().addClass("strength weak");
