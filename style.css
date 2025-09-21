@@ -1,0 +1,62 @@
+.inputpass {
+    display: flex;
+    justify-content: center;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.strength {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.weak   { color: red; }
+.fair   { color: orange; }
+.good   { color: blue; }
+.strong { color: green; }
+
+.mt-50 {
+    margin-top: 50px;
+}
+.button-sumbit {
+    background-color: black;
+    color: white;
+    border-color: darkgreen;
+    border-radius: 8px;
+    /* border: 10px solid; */
+    width: 200px;
+
+}
+.button-sumbit:hover {
+    background-color: gray;
+}
+
+body {
+    background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background: linear-gradient(to right, #667eea, #764ba2);
+    /* background: linear-gradient(135deg, #232526, #414345); */
+
+
+    /* color: white; */
+}
+.bg-purple {
+    background: rgb(127, 108, 156);
+}
+.bg-black {
+    background: black;
+}
+
+.name-site {
+    color: green;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.col-white {
+    color: white !important;
+}
